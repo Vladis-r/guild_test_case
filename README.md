@@ -49,7 +49,10 @@
 
        git clone https://github.com/Vladis-r/guild_test_case.git
 
-- заполнить файл .env
+- заполнить файл .env, установить зависимости:
+
+        pip install -r requirements.txt
+
 - создать подключение к БД SQLite3, сделать миграции, создать пользователя
 - Протестировать http часть можно с помощью postman
 - Протестировать websocket можно с помощью консоли, запустив файл marko_pollo/websocket_client.py
