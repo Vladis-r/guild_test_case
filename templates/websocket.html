@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <form>
+        <input type="text" id="message-input" placeholder="Enter message">
+        <button type="submit">Send</button>
+    </form>
+    <ul id="messages"></ul>
+    <script>
+        const socket = new WebSocket('ws://localhost:8000/ws');
+        const messageList = document.getElementById('messages');
+        const messageInput = document.getElementById('message-input');
+
+        socket.addEventListener('message', event => {
+            const li = document.createElement('li');
+            li.innerText = event.data;
+            messageList.appendChild(li);
+        });
+
+        document.querySelector('form').addEventListener('submit', event => {
+            event.preventDefault();
+            const message = messageInput.value;
+            socket.send(message);
+            messageInput.value = '';
+        });
+    </script>
+</body>
+</html>

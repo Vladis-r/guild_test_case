@@ -1,7 +1,8 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from marko_pollo.utils import gen_marko_polo
 
@@ -21,6 +22,8 @@ def one_mp_view(request):
         else:
             res = "Отправьте необходимые данные согласно образцу: '{mp_one: <number>}'"
         return JsonResponse({"result": res})
+    else:
+        return HttpResponse('<h1>Page not found</h1>')
 
 
 @login_required
@@ -38,6 +41,8 @@ def list_mp_view(request):
         else:
             res = "Отправьте необходимые данные согласно образцу: '{mp_list: [<number_1>, <number_2>, ...]}'"
         return JsonResponse({"result": res})
+    else:
+        return HttpResponse('<h1>Page not found</h1>')
 
 
 @login_required
@@ -56,3 +61,14 @@ def range_mp_view(request):
         else:
             res = "Отправьте необходимые данные согласно образцу:'{'mp_start': <number_start>, 'mp_end': <number_end>}'"
         return JsonResponse({"result": res})
+    else:
+        return HttpResponse('<h1>Page not found</h1>')
+
+
+def websocket_view(request):
+    """
+    Ручка для теста websocket. URL отключен.
+    Необходимо правильно прописать java скрипт в websocket.html.
+    До тех пор, для теста websocket, можно пользоваться marko_pollo/websocket_client.py
+    """
+    return render(request, "websocket.html")

@@ -12,9 +12,25 @@ class MarkoPoloConsumer(AsyncWebsocketConsumer):
         pass
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
-        command = data['command']
+        try:
+            data = json.loads(text_data)
+            print(type(data))
+            print(data)
+        except json.JSONDecodeError:
+            await self.send(text_data=json.dumps({'error': 'Отправьте данные в JSON формате'}, ensure_ascii=False))
+            return
 
+        if not isinstance(data, dict):
+            await self.send(text_data=json.dumps(
+                {'Неправильный запрос. Пример запроса:': {'command': 'mp_one', 'data': {'mp_one': 1}}},
+                ensure_ascii=False))
+            return
+
+        elif "command" not in data:
+            await self.send(text_data=json.dumps({'error': 'Неправильный формат данных'}, ensure_ascii=False))
+            return
+
+        command = data["command"]
         if command == 'mp_one':
             if "mp_one" in data["data"]:
                 num = data["data"]["mp_one"]

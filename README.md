@@ -29,10 +29,17 @@
 > POST core/login/
 > 
 > POST core/logout/
+> 
+> POST core/login
    
    Протестировано с помощью Postman.
    
-3. В процессе...
+3. Для решения подключена библиотека channels, сервер daphne. Для тестирования команд через консоль создан websocket-client. Примеры команд:
+> {"command": "mp_one", "data": {"mp_one": 1}}
+> 
+> {"command": "mp_list", "data": {"mp_list": [1, 2, 15, 995]}}
+> 
+> {"command": "mp_range", "data": {"mp_start": 900, "mp_end": 915}}
 
 4. Создана дополнительная ручка. Происходит запрос на kinopoisk API:
 > GET core/top_movies
@@ -43,5 +50,6 @@
        git clone https://github.com/Vladis-r/guild_test_case.git
 
 - заполнить файл .env
-- создать подключение к БД SQLite3
-- 
+- создать подключение к БД SQLite3, сделать миграции, создать пользователя
+- Протестировать http часть можно с помощью postman
+- Протестировать websocket можно с помощью консоли, запустив файл marko_pollo/websocket_client.py
