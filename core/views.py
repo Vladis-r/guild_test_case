@@ -39,10 +39,10 @@ def kinopoisk_view(request):
         "X-API-KEY": os.getenv("KINOPOISK_API")
     }
 
-    response = requests.get(url, headers=headers)
-    data = response.json()
-    print(data)
-    context = {
-        'movies': data['docs']
-    }
-    return render(request, 'top_movies.html', context)
+    if request.method == "GET":
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        context = {
+            'movies': data['docs']
+        }
+        return render(request, 'top_movies.html', context)

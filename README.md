@@ -36,3 +36,12 @@
 
 4. Создана дополнительная ручка. Происходит запрос на kinopoisk API:
 > GET core/top_movies
+
+# Запустить проект:
+- скопировать репозиторий:
+
+       git clone https://github.com/Vladis-r/guild_test_case.git
+
+- заполнить файл .env
+- создать подключение к БД SQLite3
+- 
