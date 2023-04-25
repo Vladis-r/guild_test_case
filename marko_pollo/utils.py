@@ -48,7 +48,7 @@ class MarkoPoloGen:
                 if start <= end:
                     res = True
                 else:
-                    res = "mp_start не может меньше, чем mp_end"
+                    res = "mp_start не может быть меньше, чем mp_end"
             else:
                 res = "Числа должны быть в диапазоне от 0 до 1000"
         else:
