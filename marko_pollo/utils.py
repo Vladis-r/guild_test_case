@@ -60,8 +60,9 @@ class MarkoPoloGen:
         Проверки при генерации по списку
         """
         if isinstance(list_of_mp, list):
-            for i in list_of_mp:
-                if isinstance(i, int) and 0 <= i <= 1000:
+            for index, item in enumerate(list_of_mp):
+                if item.isnumeric() and 0 <= int(item) <= 1000:
+                    list_of_mp[index] = int(item)
                     res = True
                 else:
                     return "Неверные данные в списке"
@@ -73,9 +74,9 @@ class MarkoPoloGen:
         """
         Проверки при генерации по числу
         """
-        if isinstance(number, int) and 0 <= number <= 1000:
+        if 0 <= number <= 1000:
             return True
-        return "Неверные данные"
+        return "Число должно быть от 0 до 1000"
 
 
 gen_marko_polo = MarkoPoloGen()

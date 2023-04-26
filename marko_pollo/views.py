@@ -1,10 +1,18 @@
-import json
-
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from marko_pollo.utils import gen_marko_polo
+
+
+def main_view(request):
+    """
+    Главная страница
+    """
+    if request.method == "GET":
+        return render(request, "main.html")
+    else:
+        return HttpResponse('<h1>Page not found</h1>')
 
 
 @login_required
@@ -14,14 +22,15 @@ def one_mp_view(request):
     Ручка принимает число от 0 до 1000.
     Возвращает значение Марко, Поло, МаркоПоло или число.
     """
+
     if request.method == "POST":
-        data = json.loads(request.body)
-        if "mp_one" in data:
-            num = data["mp_one"]
-            res = gen_marko_polo.generate_one(num)
+        num = request.POST.get('mp_one', None)
+        if num.isnumeric():
+            res = gen_marko_polo.generate_one(int(num))
         else:
-            res = "Отправьте необходимые данные согласно образцу: '{mp_one: <number>}'"
+            res = "Это должно быть числом от 0 до 1000"
         return JsonResponse({"result": res})
+
     else:
         return HttpResponse('<h1>Page not found</h1>')
 
@@ -33,13 +42,11 @@ def list_mp_view(request):
     Ручка принимает список чисел от 0 до 1000.
     Возвращает список значений (Марко, Поло, МаркоПоло или число).
     """
+
     if request.method == "POST":
-        data = json.loads(request.body)
-        if "mp_list" in data:
-            list_of_mp = data["mp_list"]
-            res = gen_marko_polo.generate_list(list_of_mp)
-        else:
-            res = "Отправьте необходимые данные согласно образцу: '{mp_list: [<number_1>, <number_2>, ...]}'"
+        nums = request.POST.get('mp_list', None)
+        nums = nums.split()
+        res = gen_marko_polo.generate_list(list(nums))
         return JsonResponse({"result": res})
     else:
         return HttpResponse('<h1>Page not found</h1>')
@@ -52,14 +59,14 @@ def range_mp_view(request):
     Ручка принимает два числа start и end со значениями от 0 до 1000.
     Возвращает значение Марко, Поло, МаркоПоло или число.
     """
+
     if request.method == "POST":
-        data = json.loads(request.body)
-        if "mp_start" and "mp_end" in data:
-            start = data["mp_start"]
-            end = data["mp_end"]
-            res = gen_marko_polo.generate_range(start, end)
+        start = request.POST.get('mp_start', None)
+        end = request.POST.get('mp_end', None)
+        if start.isnumeric() and end.isnumeric():
+            res = gen_marko_polo.generate_range(int(start), int(end))
         else:
-            res = "Отправьте необходимые данные согласно образцу:'{'mp_start': <number_start>, 'mp_end': <number_end>}'"
+            res = "Это должно быть число от 0 до 1000"
         return JsonResponse({"result": res})
     else:
         return HttpResponse('<h1>Page not found</h1>')
