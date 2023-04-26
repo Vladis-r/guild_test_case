@@ -57,4 +57,6 @@
 
 - создать подключение к БД SQLite3, сделать миграции, создать пользователя
 - Протестировать http часть можно через главную страничку
-- Протестировать websocket можно с помощью консоли, запустив файл marko_pollo/websocket_client.py
+- Протестировать websocket можно с помощью консоли, запустив сервер и затем файл marko_pollo/websocket_client.py
+
+        python marko_pollo/websocket_client.py
