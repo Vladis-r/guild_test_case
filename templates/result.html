@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculation Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 48px;
+            color: #333;
+        }
+        p {
+            font-size: 24px;
+            color: #666;
+        }
+        .result {
+            font-size: 72px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin: 50px 0;
+        }
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 24px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculation Result</h1>
+        <p>The result of your calculation is:</p>
+        <div class="result">{{ result }}</div>
+        <button class="button" onclick="history.back()">Go Back</button>
+    </div>
+</body>
+</html>

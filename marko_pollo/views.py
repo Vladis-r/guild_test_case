@@ -29,7 +29,7 @@ def one_mp_view(request):
             res = gen_marko_polo.generate_one(int(num))
         else:
             res = "Это должно быть числом от 0 до 1000"
-        return JsonResponse({"result": res})
+        return render(request, "result.html", {"result": res})
 
     else:
         return HttpResponse('<h1>Page not found</h1>')
@@ -47,7 +47,7 @@ def list_mp_view(request):
         nums = request.POST.get('mp_list', None)
         nums = nums.split()
         res = gen_marko_polo.generate_list(list(nums))
-        return JsonResponse({"result": res})
+        return render(request, "result.html", {"result": res})
     else:
         return HttpResponse('<h1>Page not found</h1>')
 
@@ -67,7 +67,7 @@ def range_mp_view(request):
             res = gen_marko_polo.generate_range(int(start), int(end))
         else:
             res = "Это должно быть число от 0 до 1000"
-        return JsonResponse({"result": res})
+        return render(request, "result.html", {"result": res})
     else:
         return HttpResponse('<h1>Page not found</h1>')
 
