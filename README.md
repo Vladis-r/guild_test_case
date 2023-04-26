@@ -20,6 +20,8 @@
 
    2. REST-сервис написан с помощь Django 4.2, авторизация стандартная от Django. Созданы следующие ручки:
 
+> GET /
+> 
 > POST marko_polo/one/
 > 
 > POST marko_polo/list/
@@ -54,5 +56,5 @@
         pip install -r requirements.txt
 
 - создать подключение к БД SQLite3, сделать миграции, создать пользователя
-- Протестировать http часть можно с помощью postman
+- Протестировать http часть можно через главную страничку
 - Протестировать websocket можно с помощью консоли, запустив файл marko_pollo/websocket_client.py
