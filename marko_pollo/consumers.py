@@ -14,8 +14,6 @@ class MarkoPoloConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         try:
             data = json.loads(text_data)
-            print(type(data))
-            print(data)
         except json.JSONDecodeError:
             await self.send(text_data=json.dumps({'error': 'Отправьте данные в JSON формате'}, ensure_ascii=False))
             return
