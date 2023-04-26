@@ -2,7 +2,7 @@ import os
 import requests
 
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 
@@ -17,12 +17,12 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            error_message = "Авторизация прошла успешно."
+            return redirect("/")
         else:
             error_message = "Неверные данные. Попробуйте ещё раз."
     else:
         error_message = None
-    return render(request, 'login.html', {'error_message': error_message})
+    return redirect(request, 'login.html', {'error_message': error_message})
 
 
 @csrf_exempt
